@@ -1,0 +1,999 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#13223A"><link rel="icon" href="img/mark.png"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui}img{max-width:100%}[hidden]{display:none!important}.pv{position:fixed;right:10px;bottom:10px;z-index:40;pointer-events:none;font:500 11px/1 system-ui,sans-serif;letter-spacing:.02em;color:#fff;background:rgba(19,34,58,.78);padding:6px 9px;border-radius:999px;backdrop-filter:blur(4px)}@media print{.pv{display:none}}</style></head><body><title>Valor Jiu-Jitsu</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: mobile-first single column; desktop editorial split (text 5 / photo 7); one accent (the logo blue), navy only for the review band and footer.
+   Single deliberate light look: this is a prototype of a real site that ships light. */
+:root {
+  --bg: #F4F6FA; --surface: #FFFFFF; --text: #0B1220; --muted: #4B5565; --border: #DCE2EC;
+  --navy: #13223A; --navy-2: #1B2F52; --navy-text: #AAB4C8;
+  --blue: #2369B3; --blue-hover: #1C5693; --blue-press: #174A80;
+  --sky: #DCE8FF; --sky-text: #9CC4FF; --mat: #1F6FD6; --focus: #1F6FD6; --error: #B42318;
+  --font-display: "Bricolage Grotesque", "Archivo", system-ui, sans-serif;
+  --font-text: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --d-fast: 180ms; --d-base: 280ms; --d-reveal: 520ms; --d-hero: 700ms;
+  --r-sm: 8px; --r-md: 14px; --r-lg: 22px; --r-pill: 999px;
+  --shadow-1: 0 1px 2px rgb(11 18 32 / 0.06), 0 2px 8px rgb(11 18 32 / 0.05);
+  --shadow-2: 0 8px 28px rgb(11 18 32 / 0.10);
+  --gutter: 16px; --hdr-h: 56px;
+  color-scheme: light;
+}
+@media (min-width: 900px) { :root { --gutter: 32px; --hdr-h: 64px; } }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font-text); font-size: 1.0625rem; line-height: 1.55; overflow-x: hidden; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--blue); text-decoration: none; }
+button { font: inherit; color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--font-display); font-optical-sizing: auto; letter-spacing: -0.025em; line-height: 1.04; text-wrap: balance; }
+p { margin: 0; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+::selection { background: var(--sky); }
+
+.wrap { max-width: 1200px; margin-inline: auto; padding-left: max(var(--gutter), env(safe-area-inset-left, 0px)); padding-right: max(var(--gutter), env(safe-area-inset-right, 0px)); }
+.band { padding-block: 56px; }
+@media (min-width: 900px) { .band { padding-block: 88px; } }
+.band--sky { background: var(--sky); }
+.band--navy { background: var(--navy); color: #fff; }
+.band--surface { background: var(--surface); }
+
+.eyebrow { font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+.band--navy .eyebrow { color: var(--sky-text); }
+.display { font-size: clamp(2.625rem, 1.75rem + 2.4vw, 3.75rem); font-weight: 800; } /* 42 px on the phone, ~59 px at 1280, 60 px cap: three lines beside the photo, never four */
+.h1 { font-size: clamp(2.25rem, 1.8rem + 2.4vw, 3.5rem); font-weight: 800; }
+.h2 { font-size: clamp(1.75rem, 1.4rem + 1.6vw, 2.75rem); font-weight: 700; }
+.h3 { font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem); font-weight: 700; letter-spacing: -0.015em; }
+.lede { font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.25rem); color: var(--muted); max-width: 34em; }
+.band--navy .lede { color: var(--navy-text); }
+.muted { color: var(--muted); }
+.small { font-size: 0.9375rem; }
+
+/* Buttons and links */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: var(--r-pill); font-weight: 600; font-size: 1rem; border: 1.5px solid transparent; cursor: pointer; white-space: nowrap; transition: background-color var(--d-fast) var(--ease-out), border-color var(--d-fast) var(--ease-out), color var(--d-fast) var(--ease-out), transform var(--d-fast) var(--ease-out), box-shadow var(--d-fast) var(--ease-out); }
+.btn:active { transform: scale(0.98); }
+.btn--primary { background: var(--blue); color: #fff; }
+.btn--primary:hover { background: var(--blue-hover); transform: translateY(-1px); box-shadow: var(--shadow-1); }
+.btn--primary:active { background: var(--blue-press); transform: scale(0.98); }
+.btn--ghost { background: transparent; color: var(--text); border-color: var(--border); }
+.btn--ghost:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-1px); }
+.band--navy .btn--ghost { color: #fff; border-color: rgb(255 255 255 / 0.28); }
+.band--navy .btn--ghost:hover { border-color: #fff; color: #fff; }
+.btn--sm { min-height: 44px; padding: 0 16px; font-size: 0.9375rem; }
+.link { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: var(--blue); position: relative; }
+.link::before { content: ""; position: absolute; inset: -9px 0; }
+.link::after { content: ""; position: absolute; left: 0; bottom: -2px; width: 100%; height: 1.5px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform 200ms var(--ease-out); }
+.link:hover::after { transform: scaleX(1); }
+.link--light { color: var(--sky-text); }
+.chev { width: 14px; height: 14px; flex: none; }
+
+/* Header */
+.hdr { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); transition: background-color var(--d-base), box-shadow var(--d-base); }
+.hdr.is-scrolled { background: var(--surface); box-shadow: 0 1px 0 var(--border); }
+.hdr__in { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: var(--hdr-h); }
+.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--navy); min-height: 44px; }
+.brand__mark { width: 34px; height: 32px; flex: none; background: url("img/mark.png") left center / auto 100% no-repeat; mix-blend-mode: multiply; } /* mark.png: the shield cropped from logo.jpg at 4x, 15 KB instead of 104 KB */
+.brand__word { font-family: var(--font-display); font-weight: 800; font-size: 1.125rem; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1; }
+.brand__word em { font-style: normal; font-weight: 600; color: var(--blue); letter-spacing: 0.14em; }
+.brand__word .sep { display: none; }
+@media (max-width: 399px) { .brand__word { display: none; } }
+@media (max-width: 767px) { .brand__word em { display: none; } }
+.nav { display: flex; align-items: center; gap: clamp(10px, 2.4vw, 22px); }
+.nav a:not(.btn) { color: var(--text); font-weight: 600; font-size: clamp(0.8125rem, 0.72rem + 0.45vw, 0.9375rem); min-height: 44px; display: inline-flex; align-items: center; position: relative; }
+.nav a:not(.btn)::after { content: ""; position: absolute; left: 0; right: 0; bottom: 8px; height: 2px; background: var(--blue); transform: scaleX(0); transform-origin: left; transition: transform 200ms var(--ease-out); }
+.nav a:not(.btn):hover::after, .nav a:not(.btn).is-active::after { transform: scaleX(1); }
+.nav .btn { min-height: 44px; padding: 0 14px; font-size: 0.875rem; }
+@media (min-width: 900px) { .nav .btn { min-height: 44px; padding: 0 18px; font-size: 0.9375rem; } }
+@media (max-width: 359px) { .nav { gap: 8px; } .nav .btn { padding: 0 11px; font-size: 0.8125rem; } } /* 320 px: the four items fit in one row without the button wrapping */
+.skip { position: absolute; left: 16px; top: -100px; z-index: 30; background: var(--surface); color: var(--blue); font-weight: 600; padding: 10px 14px; border-radius: var(--r-pill); box-shadow: var(--shadow-2); }
+.skip:focus { top: 12px; }
+#main:focus { outline: none; }
+
+/* Views */
+.view[hidden] { display: none; }
+.view.is-entering { animation: fadeUp 220ms var(--ease-out) both; }
+
+/* Hero */
+.hero { display: grid; gap: 28px; padding-block: 24px 56px; }
+.hero__text { display: grid; gap: 20px; align-content: center; }
+/* Load sequence runs only while the page is visible (the .anim class is added by script and removed once it has played), so the hero is never left invisible in a hidden tab or a thumbnail. */
+.hero .display .w { display: inline-block; }
+.hero .eyebrow { margin: 0; }
+.hero.anim .display .w { animation: rise 500ms var(--ease-out) calc(120ms + var(--i, 0) * 40ms) both; --ry: 24px; }
+.hero.anim .eyebrow { animation: rise 400ms var(--ease-out) 50ms both; --ry: 12px; }
+.hero.anim .lede { animation: rise 500ms var(--ease-out) 250ms both; --ry: 16px; }
+.hero.anim .actions { animation: rise 500ms var(--ease-out) 320ms both; --ry: 16px; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+@media (max-width: 479px) { .hero .actions { display: grid; } } /* small phones: the two hero buttons stack full width instead of two ragged pills */
+.hero__media { margin: 0; position: relative; border-radius: var(--r-lg); overflow: hidden; aspect-ratio: 4 / 5; background: var(--sky); }
+.hero.anim .hero__media { animation: settle var(--d-hero) var(--ease-out) 150ms both; }
+.hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
+.chip { position: absolute; left: 14px; bottom: 14px; background: rgb(255 255 255 / 0.92); color: var(--navy); font-size: 0.8125rem; font-weight: 600; padding: 8px 12px; border-radius: var(--r-pill); box-shadow: var(--shadow-1); }
+@media (min-width: 900px) {
+  .hero { grid-template-columns: 5fr 6fr; gap: 56px; align-items: center; padding-block: 40px 88px; min-height: calc(100vh - var(--hdr-h) - 40px); max-height: 860px; }
+  .hero__media { aspect-ratio: 3 / 4; max-height: 720px; justify-self: end; width: 100%; }
+}
+
+/* Facts */
+.facts { padding-block: 0 56px; }
+.facts dl { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
+.facts div { background: var(--surface); padding: 20px 18px; display: grid; gap: 4px; }
+.facts dt { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem); letter-spacing: -0.025em; line-height: 1; color: var(--navy); font-variant-numeric: tabular-nums; }
+.facts dd { margin: 0; color: var(--muted); font-size: 0.9375rem; }
+@media (min-width: 768px) { .facts dl { grid-template-columns: repeat(4, minmax(0, 1fr)); } .facts div { padding: 26px 24px; } }
+
+/* Paths */
+.paths { display: grid; gap: 14px; margin-top: 28px; }
+.path { display: grid; gap: 10px; align-content: start; background: var(--surface); color: var(--text); padding: 22px; border-radius: var(--r-md); border: 1px solid transparent; box-shadow: var(--shadow-1); transition: border-color 200ms var(--ease-out), box-shadow 200ms var(--ease-out), transform 200ms var(--ease-out); }
+.path:hover { border-color: var(--blue); box-shadow: var(--shadow-2); transform: translateY(-2px); }
+.path p { color: var(--muted); font-size: 0.9375rem; }
+.path .link { margin-top: 4px; }
+@media (min-width: 768px) { .paths { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; } }
+@media (min-width: 1100px) { .paths { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* Coaches */
+.coaches { display: grid; gap: 28px; padding-block: 56px; }
+.coaches__media { margin: 0; border-radius: var(--r-lg); overflow: hidden; aspect-ratio: 4 / 5; background: var(--sky); }
+.coaches__media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
+.coachlist { display: grid; gap: 18px; margin-top: 24px; }
+.coachlist li { display: grid; grid-template-columns: 52px 1fr; gap: 14px; align-items: start; padding-top: 18px; border-top: 1px solid var(--border); }
+.coachlist strong { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1.125rem; letter-spacing: -0.01em; }
+.coachlist span.bio { display: block; color: var(--muted); font-size: 0.9375rem; margin-top: 2px; }
+.belt { width: 52px; height: 12px; margin-top: 6px; border-radius: 2px; background: #141414; position: relative; overflow: hidden; }
+.belt::after { content: ""; position: absolute; top: 0; bottom: 0; right: 8px; width: 12px; background: #C8102E; }
+.belt--brown { background: #5A3A22; }
+.belt--brown::after { background: #141414; }
+.belt--purple { background: #5A2D82; }
+.belt--purple::after { background: #141414; }
+@media (min-width: 900px) { .coaches { grid-template-columns: 6fr 5fr; gap: 64px; align-items: center; padding-block: 88px; } .coaches__media { aspect-ratio: 3 / 4; max-height: 640px; } }
+
+/* Room strip */
+.room { padding-block: 0 56px; }
+.strip { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.strip figure { margin: 0; border-radius: var(--r-sm); overflow: hidden; aspect-ratio: 3 / 4; background: var(--sky); }
+.strip img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; }
+.strip figure:nth-child(2) img { object-position: 50% 72%; }
+.strip figure:nth-child(3) img { object-position: 50% 50%; }
+.strip figure:nth-child(4) img { object-position: 50% 62%; }
+.caption { margin-top: 14px; color: var(--text); font-size: 1rem; }
+@media (min-width: 768px) { .strip { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 900px) { .strip { gap: 14px; } .strip figure { border-radius: var(--r-md); aspect-ratio: 4 / 5; } .room { padding-block: 0 88px; } }
+
+/* Reviews */
+.quotes { display: grid; grid-auto-flow: column; grid-auto-columns: min(82%, 340px); gap: 14px; margin-top: 28px; margin-inline: -16px; padding-inline: 16px; padding-bottom: 6px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; scrollbar-width: thin; scrollbar-color: rgb(170 180 200 / 0.4) transparent; }
+.quote { scroll-snap-align: start; }
+.quote footer { display: flex; align-items: center; gap: 10px; line-height: 1.35; }
+.quote footer a { color: var(--sky-text); font-weight: 600; }
+.quote__avatar { width: 32px; height: 32px; border-radius: 50%; flex: none; object-fit: cover; background: var(--navy); }
+.quote__avatar--init { display: inline-grid; place-items: center; background: var(--blue); color: #fff; font-weight: 700; font-size: 0.875rem; }
+.reviews__note { color: var(--navy-text); font-size: 0.8125rem; margin-top: 16px; max-width: 72ch; }
+.quote { margin: 0; background: var(--navy-2); border-radius: var(--r-md); padding: 22px; display: grid; gap: 12px; align-content: start; border: 1px solid transparent; }
+.quote--pending { background: transparent; border: 1.5px dashed rgb(170 180 200 / 0.45); }
+.stars { color: var(--sky-text); letter-spacing: 0.14em; font-size: 0.9375rem; }
+.quote p { color: #fff; }
+.quote--pending p { color: var(--navy-text); font-style: italic; }
+.quote footer { color: var(--navy-text); font-size: 0.875rem; }
+.reviews .link { margin-top: 24px; }
+.quotes:empty { display: none; }   /* live domain before a Places key: rating, heading and the Google link only, no placeholder cards */
+.reviews:has(.quotes:empty) .link { margin-top: 8px; }
+@media (min-width: 768px) { .quotes { grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-inline: 0; padding-inline: 0; padding-bottom: 0; overflow: visible; } .quotes[data-n="3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .quotes[data-n="4"] { grid-template-columns: repeat(4, minmax(0, 1fr)); } }   /* 2, 3 or 4 cards never leave an orphan row on desktop */
+
+/* Visit */
+.visit { display: grid; gap: 28px; padding-block: 56px; }
+.visit__map { border-radius: var(--r-md); overflow: hidden; background: var(--surface); border: 1px solid var(--border); }
+.visit__map svg { display: block; width: 100%; height: auto; }
+@media (max-width: 599px) { .visit__map .minor { display: none; } } /* cross-street names and the scale note render near 7 px on a phone */
+.hours { width: 100%; border-collapse: collapse; margin-block: 20px; font-variant-numeric: tabular-nums; }
+.hours th, .hours td { text-align: left; padding: 9px 0; border-bottom: 1px solid var(--border); font-weight: 500; font-size: 0.9375rem; }
+.hours th { color: var(--muted); font-weight: 500; width: 45%; }
+.hours tr.is-today th, .hours tr.is-today td { color: var(--blue); font-weight: 600; }
+@media (min-width: 900px) { .visit { grid-template-columns: 7fr 5fr; gap: 64px; align-items: center; padding-block: 88px; } }
+
+/* Footer */
+.foot { padding-block: 48px 32px; }
+.foot__in { display: grid; gap: 28px; }
+.foot .word { font-family: var(--font-display); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; font-size: 1.375rem; display: block; line-height: 1.1; }
+.foot .word--thin { font-weight: 600; color: var(--sky-text); letter-spacing: 0.18em; font-size: 0.9375rem; }
+.foot p { color: var(--navy-text); margin-top: 10px; font-size: 0.9375rem; }
+.foot__reach .link { font-weight: 500; min-height: 26px; }
+.foot__reach .link + .link { margin-top: 6px; }
+.foot nav, .social { display: flex; flex-wrap: wrap; gap: 10px 20px; }
+.social { gap: 10px 14px; }
+.foot nav a, .social a { color: #fff; font-weight: 600; font-size: 0.9375rem; min-height: 44px; display: inline-flex; align-items: center; }
+.social a { color: var(--navy-text); font-weight: 500; font-size: 0.875rem; }
+.social a:hover, .foot nav a:hover { color: var(--sky-text); }
+.legal { color: var(--navy-text); font-size: 0.8125rem; border-top: 1px solid rgb(170 180 200 / 0.2); padding-top: 20px; }
+@media (min-width: 900px) { .foot__in { grid-template-columns: 1.3fr 1fr 1.1fr; align-items: start; } .legal { grid-column: 1 / -1; } } /* the five social links fit one row from 1140 up */
+@media (min-width: 900px) and (max-width: 1139px) { .foot__in { grid-template-columns: 1.3fr 1fr; } .social { grid-column: 1 / -1; } } /* narrower desktops: social row spans the width instead of orphaning "Yelp" */
+
+/* Page heads */
+.page-head { padding-block: 24px 20px; display: grid; gap: 12px; }
+.page-head .eyebrow { margin: 0; }
+@media (min-width: 900px) { .page-head { padding-block: 48px 28px; } }
+
+/* Schedule */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; padding-block: 4px 22px; }
+.chip-btn { min-height: 44px; padding: 0 16px; border-radius: var(--r-pill); border: 1.5px solid var(--border); background: var(--surface); font-weight: 600; font-size: 0.9375rem; cursor: pointer; transition: background-color var(--d-fast), border-color var(--d-fast), color var(--d-fast); }
+.chip-btn:hover { border-color: var(--blue); color: var(--blue); }
+.chip-btn[aria-pressed="true"] { background: var(--sky); border-color: var(--sky); color: var(--blue); }
+.sched { padding-bottom: 40px; }
+/* GymDesk schedule frame: kept rendered (not display:none) in every state so the frame can still measure itself and report its height */
+.gd-sched { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 10px 12px 6px; }
+.gd-sched iframe { display: block; width: 100%; border: 0; min-height: 420px; }
+.sched[data-state="idle"] .gd-sched, .sched[data-state="failed"] .gd-sched, .sched[data-state="preview"] .gd-sched { height: 0; overflow: hidden; visibility: hidden; padding: 0; border: 0; }
+.sched__wait { color: var(--muted); font-size: 0.9375rem; display: none; padding: 4px 2px 10px; }
+.sched[data-state="loading"] .sched__wait { display: block; }
+.sched__fallback { display: none; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 22px; }
+.sched[data-state="failed"] .sched__fallback { display: grid; }
+.sched__preview { display: none; }
+.sched[data-state="preview"] .sched__preview { display: block; }
+.sched__note { color: var(--muted); font-size: 0.8125rem; margin-bottom: 6px; }
+.sched__about { margin-top: 18px; max-width: 62ch; }
+#contact, #coaches, #visit, #reviews { scroll-margin-top: calc(var(--hdr-h) + 12px); }   /* in-page links on the live pages land below the sticky header */
+.days { position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border-bottom: 1px solid var(--border); margin-bottom: 8px; }
+.day-tab { background: none; border: 0; min-height: 56px; display: grid; justify-items: center; align-content: center; gap: 2px; cursor: pointer; color: var(--muted); font-weight: 600; font-size: 0.8125rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.day-tab b { font-family: var(--font-display); font-weight: 700; font-size: 1.125rem; letter-spacing: -0.01em; color: var(--text); font-variant-numeric: tabular-nums; }
+.day-tab[aria-selected="true"] { color: var(--blue); }
+.day-tab[aria-selected="true"] b { color: var(--blue); }
+.day-tab::after { content: ""; width: 5px; height: 5px; border-radius: 50%; background: transparent; }
+.day-tab.is-today::after { background: var(--mat); }
+.days__ind { position: absolute; bottom: -1px; left: 0; height: 2px; width: calc(100% / 6); background: var(--blue); transform: translateX(calc(var(--x, 0) * 100%)); transition: transform var(--d-base) var(--ease-out); }
+.board { display: grid; gap: 18px; }
+.day { display: grid; gap: 10px; align-content: start; }
+.day__h { font-family: var(--font-display); font-weight: 700; font-size: 1.0625rem; letter-spacing: -0.01em; color: var(--navy); padding-block: 6px; display: none; }
+.rows { display: grid; gap: 8px; }
+.row { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 14px; transition: border-color 200ms var(--ease-out), box-shadow 200ms var(--ease-out); }
+.row:hover { border-color: var(--blue); box-shadow: var(--shadow-1); }
+.row time { font-variant-numeric: tabular-nums; font-weight: 600; font-size: 0.9375rem; color: var(--navy); }
+.row .name { font-weight: 600; grid-column: 1; }
+.row .sub { color: var(--muted); font-size: 0.875rem; grid-column: 1; }
+.pill { grid-column: 2; grid-row: 1 / span 3; align-self: start; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 9px; border-radius: 6px; background: var(--sky); color: var(--navy); white-space: nowrap; }
+.pill--nogi { background: var(--navy); color: #fff; }
+.pill--open { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+.empty { color: var(--muted); padding: 20px 4px; font-size: 0.9375rem; }
+@media (max-width: 767px) { .board .day.is-off { display: none; } }
+@media (min-width: 768px) {
+  .days { display: none; }
+  .board { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .day__h { display: block; border-bottom: 2px solid var(--border); }
+  .day.is-today .day__h { border-color: var(--blue); color: var(--blue); }
+  .row { padding: 12px; }
+}
+@media (min-width: 1100px) { .board { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; } .row { grid-template-columns: 1fr; } .pill { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 2px; } }
+.strip-cta { display: grid; gap: 16px; align-items: center; }
+.strip-cta .h3 { max-width: 28em; }
+@media (min-width: 768px) { .strip-cta { grid-template-columns: 1fr auto; gap: 32px; } }
+
+/* Pricing */
+.plans { display: grid; gap: 14px; padding-block: 8px 40px; }
+.plan { background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--r-md); padding: 24px; display: grid; gap: 14px; align-content: start; position: relative; transition: border-color 200ms var(--ease-out), box-shadow 200ms var(--ease-out), transform 200ms var(--ease-out); }
+.plan:hover { border-color: var(--blue); box-shadow: var(--shadow-2); transform: translateY(-2px); }
+.plan--hi { border-color: var(--blue); }
+.plan .tag { position: absolute; top: -12px; left: 20px; background: var(--blue); color: #fff; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; border-radius: var(--r-pill); }
+.plan .for { color: var(--muted); font-size: 0.9375rem; }
+.price { display: flex; align-items: baseline; gap: 6px; font-family: var(--font-display); font-variant-numeric: tabular-nums; }
+.price b { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: var(--navy); }
+.price span { color: var(--muted); font-family: var(--font-text); font-size: 0.9375rem; }
+.plan ul { display: grid; gap: 8px; }
+.plan li { display: grid; grid-template-columns: 18px 1fr; gap: 8px; align-items: start; font-size: 0.9375rem; }
+.plan li svg { width: 18px; height: 18px; color: var(--blue); margin-top: 2px; }
+.plan .actions { margin-top: 6px; align-items: center; }
+.plan .link { font-size: 0.9375rem; }
+@media (min-width: 768px) { .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; } }
+@media (min-width: 1100px) { .plans { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.terms { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 18px 20px; display: grid; gap: 6px; }
+.terms strong { font-weight: 600; }
+.terms .small { color: var(--muted); }
+
+/* FAQ and contact */
+.faq-grid { display: grid; gap: 40px; padding-bottom: 56px; }
+.acc { border-top: 1px solid var(--border); }
+.acc__item { border-bottom: 1px solid var(--border); }
+.acc__btn { width: 100%; background: none; border: 0; text-align: left; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 0; font-family: var(--font-display); font-weight: 700; font-size: 1.0625rem; letter-spacing: -0.01em; cursor: pointer; min-height: 56px; }
+.acc__btn:hover { color: var(--blue); }
+.acc__btn svg { width: 20px; height: 20px; flex: none; color: var(--blue); transition: transform var(--d-base) var(--ease-out); }
+.acc__btn[aria-expanded="true"] svg { transform: rotate(45deg); }
+.acc__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--d-base) var(--ease-out); }
+.acc__panel > div { overflow: hidden; min-height: 0; }
+.acc__panel p { color: var(--muted); padding-bottom: 20px; max-width: 60ch; }
+.acc__item.is-open .acc__panel { grid-template-rows: 1fr; }
+.contact { display: grid; gap: 28px; }
+/* Free-trial card: three steps and one button to the gym's GymDesk trial form (details + waiver). GymDesk refuses to be framed, so it is a link, not an embed. */
+.book { display: grid; gap: 18px; align-content: start; align-self: start; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 22px; }
+.book__steps { display: grid; gap: 14px; counter-reset: step; }
+.book__steps li { position: relative; padding-left: 40px; min-height: 28px; color: var(--muted); counter-increment: step; }
+.book__steps li::before { content: counter(step); position: absolute; left: 0; top: -2px; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--sky); color: var(--navy); font: 700 0.875rem/1 var(--font-display); }
+.book__steps b { color: var(--text); font-weight: 600; }
+.book__go { justify-self: start; }
+.book .note { color: var(--muted); font-size: 0.875rem; }
+.book .note a { text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 479px) { .book__go { justify-self: stretch; } }
+.info { display: grid; gap: 18px; align-content: start; }
+.info address { font-style: normal; }
+.info .hours { margin-block: 0; }
+.reach p + p { margin-top: 10px; }
+.reach .link { word-break: break-all; }
+@media (min-width: 900px) { .faq-grid { grid-template-columns: 1fr; padding-bottom: 88px; } .contact { grid-template-columns: 7fr 5fr; gap: 48px; } .book { padding: 28px; } }
+@media (min-width: 1100px) { .acc { columns: 2; column-gap: 48px; border-top: 0; } .acc__item { break-inside: avoid; border-top: 1px solid var(--border); border-bottom: 0; } }
+
+/* Reveal and keyframes */
+@keyframes rise { from { opacity: 0; transform: translateY(var(--ry, 24px)); } to { opacity: 1; transform: none; } }
+@keyframes settle { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: none; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@supports (animation-timeline: view()) {
+  .reveal { animation: rise linear both; animation-timeline: view(); animation-range: entry calc(0% + var(--i, 0) * 6%) entry calc(38% + var(--i, 0) * 6%); --ry: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero.anim .display .w, .hero.anim .eyebrow, .hero.anim .lede, .hero.anim .actions, .hero.anim .hero__media, .reveal { animation: none !important; }
+  .view.is-entering { animation: fade 120ms both; }
+  .btn, .path, .plan, .row, .link::after, .nav a::after, .days__ind, .acc__btn svg, .acc__panel { transition: none !important; }
+  .btn:hover, .path:hover, .plan:hover { transform: none; }
+}
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+
+<a class="skip" href="#main" data-skip>Skip to content</a>
+<header class="hdr" id="hdr">
+  <div class="wrap hdr__in">
+    <a href="#home" class="brand" aria-label="Valor Jiu-Jitsu, home">
+      <span class="brand__mark" aria-hidden="true"></span>
+      <span class="brand__word">Valor <em>Jiu-Jitsu</em></span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#schedule" data-nav="schedule">Schedule</a>
+      <a href="#pricing" data-nav="pricing">Pricing</a>
+      <a href="#faq" data-nav="faq">FAQ</a>
+      <a href="#contact" class="btn btn--primary">Free trial</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HOME -->
+<section class="view" data-view="home" aria-label="Home">
+  <div class="wrap hero">
+    <div class="hero__text">
+      <p class="eyebrow">Brazilian jiu-jitsu · Pasadena</p>
+      <h1 class="display" id="hero-h1">Jiu-jitsu for kids and adults, six days a week.</h1>
+      <p class="lede">Gi and no-gi classes for every level, month to month, on Los Robles Avenue. Your first class is free.</p>
+      <div class="actions">
+        <a class="btn btn--primary" href="#contact">Book a free class</a>
+        <a class="btn btn--ghost" href="#schedule">See the schedule</a>
+      </div>
+    </div>
+    <figure class="hero__media">
+      <img src="img/team.jpg" srcset="img/team-800.jpg 800w, img/team.jpg 1600w" sizes="(min-width: 900px) 46vw, calc(100vw - 32px)" alt="Coaches Jando, Jason and Tofu standing on the blue mats at Valor Jiu-Jitsu" width="1600" height="2133" fetchpriority="high">
+      <figcaption class="chip">36 S Los Robles Ave</figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap facts reveal">
+    <dl>
+      <div><dt>24</dt><dd>classes a week</dd></div>
+      <div><dt>Ages 5+</dt><dd>kids and adults</dd></div>
+      <div><dt>Gi · No-Gi</dt><dd>both, every week</dd></div>
+      <div><dt>Monthly</dt><dd>no long-term contract</dd></div>
+    </dl>
+  </div>
+
+  <section class="band band--sky" aria-labelledby="paths-h">
+    <div class="wrap">
+      <p class="eyebrow reveal">Start here</p>
+      <h2 class="h2 reveal" id="paths-h">Which one are you?</h2>
+      <div class="paths">
+        <a class="path reveal" style="--i:0" href="#schedule" data-filter="adults">
+          <h3 class="h3">I've never trained</h3>
+          <p>Come to any adult class and tell the coach it's your first day. Shorts and a T-shirt are fine.</p>
+          <span class="link">Adult classes <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
+        </a>
+        <a class="path reveal" style="--i:1" href="#schedule" data-filter="adults">
+          <h3 class="h3">I've trained before</h3>
+          <p>Gi at noon and evenings, no-gi mornings and noon, open mat Friday 12 to 2. Drop in on a free class.</p>
+          <span class="link">See the week <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
+        </a>
+        <a class="path reveal" style="--i:2" href="#schedule" data-filter="kids">
+          <h3 class="h3">I'm a parent</h3>
+          <p>Ages 5 to 8 at 4 pm and 9 to 13 at 5 pm, Monday to Thursday, plus Saturday mornings.</p>
+          <span class="link">Kids schedule <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
+        </a>
+        <a class="path reveal" style="--i:3" href="#pricing">
+          <h3 class="h3">I want to train with women</h3>
+          <p>Coach Marnie's women-only self-defense class, Saturdays at 9 am. $120 a month.</p>
+          <span class="link">Women's class <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap coaches" id="coaches" aria-labelledby="coaches-h">
+    <figure class="coaches__media reveal">
+      <img src="img/coaches.jpg" srcset="img/coaches-800.jpg 800w, img/coaches.jpg 1600w" sizes="(min-width: 900px) 48vw, calc(100vw - 32px)" alt="Three of the four coaches kneeling on the mats" width="1600" height="2133" loading="lazy" decoding="async">
+    </figure>
+    <div class="coaches__text">
+      <p class="eyebrow reveal">The coaches</p>
+      <h2 class="h2 reveal" id="coaches-h">Multiple coaches, one room.</h2>
+      <ul class="coachlist">
+        <li class="reveal" style="--i:0"><span class="belt" role="img" aria-label="Black belt"></span><div><strong>David "Tofu" Zepeda</strong><span class="bio">Head instructor and co-owner. Black belt under Jason, 2023. On the mats since 2010, teaching since 2018.</span></div></li>
+        <li class="reveal" style="--i:1"><span class="belt" role="img" aria-label="Black belt"></span><div><strong>Jason Juatco</strong><span class="bio">Black belt under Ricardo "Franjinha" Miller of Paragon BJJ, 2019. Started at 10th Planet Burbank in 2007.</span></div></li>
+        <li class="reveal" style="--i:2"><span class="belt belt--brown" role="img" aria-label="Brown belt"></span><div><strong>Alejandro "Jando" Urquiza</strong><span class="bio">Co-owner. Brown belt, nine years under Jason. Came from Olympic weightlifting; runs the leg-lock material.</span></div></li>
+        <li class="reveal" style="--i:3"><span class="belt belt--purple" role="img" aria-label="Purple belt"></span><div><strong>Marnie Wheeler</strong><span class="bio">Purple belt. Runs the women's self-defense class, Saturdays at 9 am, women only on the mat.</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="room" aria-label="Community">
+    <div class="wrap">
+      <div class="strip">
+        <figure class="reveal" style="--i:0"><img src="img/community.jpg" srcset="img/community-640.jpg 640w, img/community.jpg 1200w" sizes="(min-width: 900px) 22vw, (min-width: 768px) 23vw, calc(50vw - 20px)" alt="Eight adult members in gis lined up along the brick wall after class" width="1200" height="1600" loading="lazy" decoding="async"></figure>
+        <figure class="reveal" style="--i:1"><img src="img/kids-medals.jpg" srcset="img/kids-medals-640.jpg 640w, img/kids-medals.jpg 1200w" sizes="(min-width: 900px) 22vw, (min-width: 768px) 23vw, calc(50vw - 20px)" alt="Six kids from the kids classes with their medals at a tournament" width="1200" height="1600" loading="lazy" decoding="async"></figure>
+        <figure class="reveal" style="--i:2"><img src="img/podium.jpg" srcset="img/podium-640.jpg 640w, img/podium.jpg 1200w" sizes="(min-width: 900px) 22vw, (min-width: 768px) 23vw, calc(50vw - 20px)" alt="Two girls from the kids classes on the top step of a NAGA podium, one holding a champion's belt" width="1200" height="1600" loading="lazy" decoding="async"></figure>
+        <figure class="reveal" style="--i:3"><img src="img/womens.jpg" srcset="img/womens-640.jpg 640w, img/womens.jpg 1200w" sizes="(min-width: 900px) 22vw, (min-width: 768px) 23vw, calc(50vw - 20px)" alt="The women's self-defense class drilling grips on the mats" width="1200" height="1600" loading="lazy" decoding="async"></figure>
+      </div>
+      <p class="caption reveal">Community for all. Classes for adults, kids, competition, and self-defense.</p>
+    </div>
+  </section>
+
+  <section class="band band--navy reviews" aria-labelledby="reviews-h" id="reviews" data-state="idle">
+    <div class="wrap">
+      <p class="eyebrow reveal" id="reviews-eyebrow">5.0 on Google · 19 reviews</p>
+      <h2 class="h2 reveal" id="reviews-h">What members say</h2>
+      <div class="quotes" id="quotes" aria-live="polite">
+        <blockquote class="quote quote--pending reveal" style="--i:0"><div class="stars" role="img" aria-label="Five stars">★★★★★</div><p>A member's own words go here, quoted exactly, once they say yes.</p><footer>First name · on Google · month and year</footer></blockquote>
+        <blockquote class="quote quote--pending reveal" style="--i:1"><div class="stars" role="img" aria-label="Five stars">★★★★★</div><p>Second review, with permission. Nothing on this page is invented.</p><footer>First name · on Google · month and year</footer></blockquote>
+        <blockquote class="quote quote--pending reveal" style="--i:2"><div class="stars" role="img" aria-label="Five stars">★★★★★</div><p>Third review. Parents of kids in the programme read this one first.</p><footer>First name · on Google · month and year</footer></blockquote>
+      </div>
+      <p class="reviews__note" id="reviews-note" hidden></p>
+      <a class="link link--light reveal" id="reviews-link" href="https://www.google.com/maps?cid=11177956336602960527" target="_blank" rel="noopener"><span>Read all 19 reviews on Google Maps</span> <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></a>
+    </div>
+  </section>
+
+  <section class="wrap visit" id="visit" aria-labelledby="visit-h">
+    <div class="visit__map reveal" aria-hidden="true">
+      <svg viewBox="0 0 640 400" role="img" aria-label="Schematic map: Valor Jiu-Jitsu on Los Robles Avenue between Colorado Boulevard and Green Street, with parking on Green Street and at The Paseo">
+        <rect width="640" height="400" fill="#FFFFFF"/>
+        <g stroke="#DCE2EC" stroke-width="2"><line x1="0" y1="60" x2="640" y2="60"/><line x1="0" y1="340" x2="640" y2="340"/></g>
+        <g stroke="#E6EBF3" stroke-width="22" stroke-linecap="square"><line x1="0" y1="120" x2="640" y2="120"/><line x1="0" y1="290" x2="640" y2="290"/><line x1="150" y1="0" x2="150" y2="120"/><line x1="150" y1="290" x2="150" y2="400"/><line x1="490" y1="0" x2="490" y2="400"/></g>
+        <g stroke="#CBD5E6" stroke-width="30" stroke-linecap="square"><line x1="320" y1="0" x2="320" y2="400"/></g>
+        <g font-family="Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#4B5565">
+          <text x="24" y="106">E Colorado Blvd</text>
+          <text x="24" y="276">E Green St</text>
+          <text class="minor" x="158" y="40">S Euclid Ave</text>
+          <text class="minor" x="498" y="40">S Oakland Ave</text>
+          <text x="332" y="384" fill="#13223A" font-weight="700">S Los Robles Ave</text>
+        </g>
+        <rect x="16" y="147" width="273" height="100" rx="10" fill="#EEF2F8"/>
+        <g font-family="Instrument Sans, system-ui, sans-serif">
+          <circle cx="46" cy="197" r="14" fill="#2369B3"/><text x="46" y="203" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">P</text>
+          <text x="70" y="193" font-size="17" font-weight="700" fill="#13223A">The Paseo</text>
+          <text x="70" y="212" font-size="14" font-weight="500" fill="#4B5565">Garage parking</text>
+          <circle cx="424" cy="290" r="11" fill="#2369B3"/><text x="424" y="295" text-anchor="middle" font-size="14" font-weight="700" fill="#FFFFFF">P</text>
+          <text x="442" y="325" text-anchor="middle" font-size="14" font-weight="600" fill="#13223A">Street parking</text>
+        </g>
+        <g transform="translate(346 196)">
+          <circle r="26" fill="#DCE8FF"/>
+          <path d="M0-16c-7.2 0-13 5.8-13 13 0 9.8 13 23 13 23s13-13.2 13-23c0-7.2-5.8-13-13-13z" fill="#2369B3"/>
+          <circle cy="-3" r="4.5" fill="#FFFFFF"/>
+          <text x="38" y="-6" font-family="Bricolage Grotesque, system-ui, sans-serif" font-size="20" font-weight="800" fill="#13223A">Valor Jiu-Jitsu</text>
+          <text x="38" y="16" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="500" fill="#4B5565">36 S Los Robles Ave</text>
+        </g>
+        <text class="minor" x="616" y="384" text-anchor="end" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" fill="#AAB4C8">N ↑ · not to scale</text>
+      </svg>
+    </div>
+    <div class="visit__info">
+      <p class="eyebrow reveal">Visit</p>
+      <h2 class="h2 reveal" id="visit-h">36 S Los Robles Ave</h2>
+      <p class="muted reveal">Pasadena, CA 91101. Half a block south of Colorado Blvd. Members park on Green St or at The Paseo across the street.</p>
+      <table class="hours reveal" aria-label="Opening hours">
+        <tr data-day="1"><th scope="row">Monday</th><td>6:00 am – 7:30 pm</td></tr>
+        <tr data-day="2"><th scope="row">Tuesday</th><td>12:00 – 7:30 pm</td></tr>
+        <tr data-day="3"><th scope="row">Wednesday</th><td>6:00 am – 7:30 pm</td></tr>
+        <tr data-day="4"><th scope="row">Thursday</th><td>12:00 – 7:30 pm</td></tr>
+        <tr data-day="5"><th scope="row">Friday</th><td>11:00 am – 2:00 pm</td></tr>
+        <tr data-day="6"><th scope="row">Saturday</th><td>9:00 am – 1:15 pm</td></tr>
+        <tr data-day="0"><th scope="row">Sunday</th><td>Closed</td></tr>
+      </table>
+      <div class="actions reveal">
+        <a class="btn btn--ghost" href="https://www.google.com/maps/search/?api=1&query=36+S+Los+Robles+Ave+Pasadena+CA+91101" target="_blank" rel="noopener">Open in Google Maps</a>
+        <a class="btn btn--primary" href="#contact">Book a free class</a>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- SCHEDULE -->
+<section class="view" data-view="schedule" aria-label="Schedule" hidden>
+  <div class="wrap page-head">
+    <p class="eyebrow">Schedule</p>
+    <h1 class="h1">This week on the mat.</h1>
+    <p class="lede">Six days a week, Sunday closed. All levels unless noted. First class free.</p>
+  </div>
+  <div class="wrap sched" id="sched" data-state="idle">
+    <div class="gd-sched" id="gd-sched">
+      <p class="sched__wait" role="status">Loading this week's classes…</p>
+    </div>
+    <div class="sched__fallback">
+      <p class="h3">The schedule didn't load.</p>
+      <p>Open it on GymDesk, or call <a href="tel:+16263455348">(626) 345-5348</a> and we'll tell you what's on.</p>
+      <div class="actions"><a class="btn btn--ghost" href="https://app.gymdesk.com/widgets/schedule/render/gym/AEQWL" target="_blank" rel="noopener">Open the schedule on GymDesk</a></div>
+    </div>
+    <div class="sched__preview">
+      <p class="sched__note">Preview: on the live site this is the gym's GymDesk schedule, so class times are edited in GymDesk only. This prototype page can't show it, so the times below are the site's own copy.</p>
+      <div class="chips" role="group" aria-label="Filter by programme">
+        <button class="chip-btn" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="chip-btn" type="button" data-filter="adults" aria-pressed="false">Adults</button>
+        <button class="chip-btn" type="button" data-filter="kids" aria-pressed="false">Kids</button>
+        <button class="chip-btn" type="button" data-filter="womens" aria-pressed="false">Women's</button>
+        <button class="chip-btn" type="button" data-filter="openmat" aria-pressed="false">Open mat</button>
+      </div>
+      <div class="days" role="tablist" aria-label="Day" id="days"></div>
+      <div class="board" id="board"></div>
+    </div>
+    <p class="muted small sched__about">Kids classes for ages 5 to 8 and 9 to 13, adult gi and no-gi, women's self-defense on Saturdays and open mat on Fridays, all at 36 S Los Robles Ave in Pasadena. Times above come straight from the gym's booking system.</p>
+  </div>
+  <div class="band band--sky">
+    <div class="wrap strip-cta">
+      <p class="h3">First class is free. Come ten minutes early, and shorts and a T-shirt are fine for day one.</p>
+      <a class="btn btn--primary" href="#contact">Book a free class</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="view" data-view="pricing" aria-label="Pricing" hidden>
+  <div class="wrap page-head">
+    <p class="eyebrow">Pricing</p>
+    <h1 class="h1">Month to month. That's the whole deal.</h1>
+    <p class="lede">One price covers gi and no-gi. No sign-up fee, no long-term contract, cancel by email.</p>
+  </div>
+  <div class="wrap">
+    <div class="plans" id="plans"></div>
+    <div class="terms">
+      <strong>Join opens the gym's sign-up on GymDesk: your details, the waiver and your card, about three minutes.</strong>
+      <p>Your first payment covers the rest of this month; after that it's the 1st of every month. Cancel any time by email to the gym; no cancellation fee.</p>
+      <p class="small">Final wording follows the membership agreement. Drafted from research and current best practice. Not legal advice. Requires review by a licensed professional in the client's jurisdiction before reliance.</p>
+    </div>
+  </div>
+  <div class="band">
+    <div class="wrap strip-cta">
+      <p class="h3">Not sure which one? Come to a free class first and decide on the mat.</p>
+      <a class="btn btn--primary" href="#contact">Book a free class</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ & CONTACT -->
+<section class="view" data-view="faq" aria-label="FAQ and contact" hidden>
+  <div class="wrap page-head">
+    <p class="eyebrow">FAQ</p>
+    <h1 class="h1">Questions people ask before their first class.</h1>
+  </div>
+  <div class="wrap faq-grid">
+    <div class="acc" id="acc"></div>
+    <div class="contact" id="contact">
+      <div class="book" id="book">
+        <h2 class="h2">Book a free class</h2>
+        <ol class="book__steps">
+          <li><b>Sign up and sign the waiver online.</b> About two minutes. Parents sign for kids.</li>
+          <li><b>We get in touch by the next day</b> to pick your class.</li>
+          <li><b>Come ten minutes early.</b> Shorts and a T-shirt are fine; bring water.</li>
+        </ol>
+        <a class="btn btn--primary book__go" id="book-go" href="https://valor-jiu-jitsu.gymdesk.com/signup/v/lOmNk">Book my free class</a>
+        <p class="note">Opens the gym's sign-up on GymDesk. Rather talk first? Call <a href="tel:+16263455348">(626) 345-5348</a> or message <a href="https://www.instagram.com/valorjiujitsu" target="_blank" rel="noopener">@valorjiujitsu</a>.</p>
+      </div>
+      <div class="info">
+        <div>
+          <p class="eyebrow">Find us</p>
+          <address><strong>36 S Los Robles Ave</strong><br>Pasadena, CA 91101<br><span class="muted">Half a block south of Colorado Blvd.</span></address>
+        </div>
+        <table class="hours" aria-label="Opening hours">
+          <tr><th scope="row">Mon, Wed</th><td>6:00 am – 7:30 pm</td></tr>
+          <tr><th scope="row">Tue, Thu</th><td>12:00 – 7:30 pm</td></tr>
+          <tr><th scope="row">Fri</th><td>11:00 am – 2:00 pm</td></tr>
+          <tr><th scope="row">Sat</th><td>9:00 am – 1:15 pm</td></tr>
+          <tr><th scope="row">Sun</th><td>Closed</td></tr>
+        </table>
+        <div class="reach">
+          <p class="small muted">Call, email, or message us on Instagram.</p>
+          <p><a class="link" href="tel:+16263455348">(626) 345-5348 <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></a></p>
+          <p><a class="link" href="mailto:thevalorjiujitsu@gmail.com">thevalorjiujitsu@gmail.com <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></a></p>
+          <p><a class="link" href="https://www.instagram.com/valorjiujitsu" target="_blank" rel="noopener">@valorjiujitsu <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></a></p>
+        </div>
+        <a class="btn btn--ghost" href="https://www.google.com/maps/search/?api=1&query=36+S+Los+Robles+Ave+Pasadena+CA+91101" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot band band--navy">
+  <div class="wrap foot__in">
+    <div class="foot__brand">
+      <span class="word">Valor</span>
+      <span class="word word--thin">Jiu-Jitsu</span>
+      <p>36 S Los Robles Ave<br>Pasadena, CA 91101</p>
+      <p class="foot__reach"><a class="link link--light" href="tel:+16263455348">(626) 345-5348</a><br><a class="link link--light" href="mailto:thevalorjiujitsu@gmail.com">thevalorjiujitsu@gmail.com</a></p>
+    </div>
+    <nav aria-label="Footer">
+      <a href="#schedule">Schedule</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Free trial</a>
+    </nav>
+    <div class="social">
+      <a href="https://www.instagram.com/valorjiujitsu" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/profile.php?id=61562086900852" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.tiktok.com/@valorjiujitsu" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://www.youtube.com/@valorjiujitsu-ry9fu" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.yelp.com/biz/valor-jiu-jitsu-pasadena" target="_blank" rel="noopener">Yelp</a>
+    </div>
+    <p class="legal">© 2026 Valor Jiu-Jitsu · Privacy and accessibility pages arrive with the live site.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- Data (mirrors content/schedule.json, pricing.json, faq.json) ----------
+     @prerender-start: pure data and templates only (no DOM). build-site.mjs evaluates this block in Node to write the
+     pricing cards, the FAQ and their structured data into the static pages, so crawlers that run no script see them. */
+  const DAYS = [
+    { key: 'mon', label: 'Monday', short: 'Mon', js: 1 },
+    { key: 'tue', label: 'Tuesday', short: 'Tue', js: 2 },
+    { key: 'wed', label: 'Wednesday', short: 'Wed', js: 3 },
+    { key: 'thu', label: 'Thursday', short: 'Thu', js: 4 },
+    { key: 'fri', label: 'Friday', short: 'Fri', js: 5 },
+    { key: 'sat', label: 'Saturday', short: 'Sat', js: 6 }
+  ];
+  const monWed = [
+    { start: '06:00', end: '07:15', name: 'Adult No-Gi', prog: 'adults', fmt: 'nogi', sub: 'All levels' },
+    { start: '12:00', end: '13:30', name: 'Adult No-Gi', prog: 'adults', fmt: 'nogi', sub: 'All levels' },
+    { start: '16:00', end: '17:00', name: 'Kids Gi', prog: 'kids', fmt: 'gi', sub: 'Ages 5 to 8' },
+    { start: '17:00', end: '18:00', name: 'Kids Gi', prog: 'kids', fmt: 'gi', sub: 'Ages 9 to 13' },
+    { start: '18:00', end: '19:30', name: 'Adult Gi', prog: 'adults', fmt: 'gi', sub: 'All levels' }
+  ];
+  const tueThu = [
+    { start: '12:00', end: '13:30', name: 'Adult Gi', prog: 'adults', fmt: 'gi', sub: 'All levels' },
+    { start: '16:00', end: '17:00', name: 'Kids No-Gi', prog: 'kids', fmt: 'nogi', sub: 'Ages 5 to 8' },
+    { start: '17:00', end: '18:00', name: 'Kids No-Gi', prog: 'kids', fmt: 'nogi', sub: 'Ages 9 to 13' },
+    { start: '18:00', end: '19:30', name: 'Adult No-Gi', prog: 'adults', fmt: 'nogi', sub: 'All levels' }
+  ];
+  const WEEK = {
+    mon: monWed, tue: tueThu, wed: monWed, thu: tueThu,
+    fri: [
+      { start: '11:00', end: '12:00', name: 'Conditioning', prog: 'adults', fmt: 'fit', sub: 'All levels' },
+      { start: '12:00', end: '14:00', name: 'Open Mat', prog: 'openmat', fmt: 'open', sub: 'All members, gi or no-gi' }
+    ],
+    sat: [
+      { start: '09:00', end: '10:00', name: "Women's Self Defense", prog: 'womens', fmt: 'gi', sub: 'Women only · Coach Marnie' },
+      { start: '10:00', end: '11:00', name: 'Kids Gi', prog: 'kids', fmt: 'gi', sub: 'Ages 5 to 8' },
+      { start: '11:00', end: '12:00', name: 'Kids Gi', prog: 'kids', fmt: 'gi', sub: 'Ages 9 to 13' },
+      { start: '12:00', end: '13:15', name: 'Adult Gi', prog: 'adults', fmt: 'gi', sub: 'All levels' }
+    ]
+  };
+  const PROG_LABEL = { all: 'all', adults: 'adult', kids: 'kids', womens: "women's", openmat: 'open mat' };
+  /* Sign-up runs on GymDesk (gym AEQWL): one form per plan, each with the waiver and the card (Square behind GymDesk).
+     GymDesk refuses to be framed (X-Frame-Options: SAMEORIGIN) and widgets.js has no sign-up widget, so the buttons
+     link out in the same tab. check-signup.mjs compares these forms' names and prices with PLANS before every deploy. */
+  const GD_SIGNUP = 'https://valor-jiu-jitsu.gymdesk.com/signup/v/';   // the free-trial form (lOmNk) is the #book-go link in the contact card
+  const PLANS = [
+    { id: 'unlimited', form: 'l4BQO', name: 'Unlimited', who: 'One adult or one kid, every class', price: 220, hi: true, inc: ['Every gi and no-gi class', 'Open mat on Fridays', 'Month to month'] },
+    { id: 'twice', form: '6V2a2', name: 'Two classes a week', who: 'Adults who train on a fixed routine', price: 200, inc: ['Any two classes per week', 'Gi or no-gi', 'Month to month'] },
+    { id: 'womens', form: '6X28x', name: "Women's Self Defense", who: 'Saturdays at 9 am with Coach Marnie, women only', price: 120, inc: ['Weekly women-only class', 'No experience needed', 'Month to month'] },
+    { id: 'vets', form: '6a2Rm', name: 'Veterans and first responders', who: 'Unlimited, with a thank-you rate', price: 200, inc: ['Every gi and no-gi class', 'Open mat on Fridays', 'Month to month'] },
+    { id: 'fam2', form: 'AR2Jq', name: 'Family of two', who: 'Two people, one household', price: 420, inc: ['Unlimited for both', 'Kids and adults mix freely', 'One of you signs up; we add the other', 'Month to month'] },
+    { id: 'fam3', form: 'DjpVM', name: 'Family of three', who: 'Three people, one household', price: 520, inc: ['Unlimited for all three', 'Kids and adults mix freely', 'One of you signs up; we add the others', 'Month to month'] }
+  ];
+  const FAQ = [
+    { q: 'What happens at my first class?', a: "Come ten minutes early, meet the coach, and join the warm-up. You'll learn two or three movements and drill them with a partner. Nobody is thrown into sparring on day one. Booking online covers the waiver; if you walk in, you'll sign it at the gym first." },
+    { q: 'What should I bring or wear for my first class?', a: "Shorts without pockets or zips and a T-shirt or rash guard are fine for your first few classes. For your first gi class we can lend you a gi if you don't have one; you'll need your own once you join. Bring sandals so you can walk on and off the mats easily, and a refillable water bottle." },
+    { q: 'Which kids class is my child in?', a: 'Ages 5 to 8 train at 4 pm and ages 9 to 13 at 5 pm, Monday to Thursday, plus Saturday mornings at 10 and 11. The coach will move a child between groups if size or experience calls for it.' },
+    { q: 'Is the women’s class only for women?', a: 'Yes. Coach Marnie runs it: Saturdays at 9 am, women only on the mat, built around self-defense. Many members also train in the mixed adult classes; the women’s class is $120 a month on its own.' },
+    { q: 'Do veterans and first responders get a rate?', a: 'Yes, unlimited training at $200 a month. The gym also works with the WeDefy Foundation, which supports combat veterans training jiu-jitsu.' },
+    { q: 'What is open mat?', a: 'Friday from 12 to 2, members roll freely with whoever is there, gi or no-gi. It is included in every membership.' },
+    { q: 'Where do I park?', a: 'Most members park on Green Street. Los Robles and Colorado are tough for parking. You can also park at The Paseo, across the street.' },
+    { q: 'How do I cancel?', a: 'Email the gym. Memberships are month to month and there is no cancellation fee. Final wording follows the membership agreement.' },
+    { q: 'Am I too old or too out of shape?', a: "No. We have members of all ages and we scale every drill. You don't have to get in shape to start jiu-jitsu. Start jiu-jitsu to get in shape." },
+    { q: 'Is my first class really free?', a: 'Yes. Book it on this page or walk in before any class on the schedule. Bring water.' }
+  ];
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const chev = '<svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>';
+  const check = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>';
+  const planHtml = (p, i) =>
+    '<article class="plan' + (p.hi ? ' plan--hi' : '') + ' reveal" style="--i:' + (i % 3) + '">' +
+    (p.hi ? '<span class="tag">Most people</span>' : '') +
+    '<h2 class="h3">' + esc(p.name) + '</h2><p class="for">' + esc(p.who) + '</p>' +
+    '<p class="price"><b>$' + p.price + '</b><span>/ month</span></p>' +
+    '<ul>' + p.inc.map((x) => '<li>' + check + '<span>' + esc(x) + '</span></li>').join('') + '</ul>' +
+    '<div class="actions"><a class="btn ' + (p.hi ? 'btn--primary' : 'btn--ghost') + '" href="' + (p.form ? GD_SIGNUP + p.form : '#contact') + '">Join<span class="sr-only"> ' + esc(p.name) + '</span></a><a class="link" href="#contact">Try a free class first ' + chev + '</a></div>' +
+    '</article>';
+  const faqHtml = (f, i) =>
+    '<div class="acc__item" id="faq-' + i + '"><h2 class="sr-only">' + esc(f.q) + '</h2><button class="acc__btn" type="button" aria-expanded="false" aria-controls="faq-p-' + i + '" id="faq-b-' + i + '">' + esc(f.q) +
+    '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg></button>' +
+    '<div class="acc__panel" id="faq-p-' + i + '" role="region" aria-labelledby="faq-b-' + i + '"><div><p>' + esc(f.a) + '</p></div></div></div>';
+  /* @prerender-end */
+
+  /* ---------- Helpers ---------- */
+  const $ = (s, r) => (r || document).querySelector(s);
+  const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+  const fmtTime = (hhmm, withSuffix) => {
+    const [h, m] = hhmm.split(':').map(Number);
+    const h12 = ((h + 11) % 12) + 1;
+    return h12 + ':' + String(m).padStart(2, '0') + (withSuffix ? (h < 12 ? ' am' : ' pm') : '');
+  };
+  const range = (s, e) => {
+    const sameHalf = (Number(s.slice(0, 2)) < 12) === (Number(e.slice(0, 2)) < 12);
+    return fmtTime(s, !sameHalf) + '–' + fmtTime(e, true);
+  };
+  const todayJs = new Date().getDay();
+  const todayKey = (DAYS.find((d) => d.js === todayJs) || DAYS[0]).key;
+
+  const LIVE_HOST = /(^|\.)thevalorjiujitsu\.com$/i.test(location.hostname);   // live domain: real fallbacks; anywhere else: prototype previews
+  if (!document.documentElement.lang) document.documentElement.lang = 'en';      // the artifact skeleton has no lang; the build sets it in <html>
+
+  /* ---------- Header: scrolled state ---------- */
+  const hdr = $('#hdr');
+  const onScroll = () => hdr.classList.toggle('is-scrolled', window.scrollY > 8);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- Hero: split headline into words for the stagger; play the load sequence only when visible ---------- */
+  const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  (function splitWords() {
+    const h = $('#hero-h1');
+    if (!h) return;
+    const words = h.textContent.trim().split(/\s+/);
+    h.setAttribute('aria-label', words.join(' '));
+    h.innerHTML = words.map((w, i) => '<span class="w" style="--i:' + i + '" aria-hidden="true">' + esc(w) + '</span>').join(' ');
+  })();
+  function playHero() {
+    const hero = $('.hero');
+    if (!hero || !motionOK || document.visibilityState !== 'visible') return;
+    hero.classList.add('anim');
+    setTimeout(() => hero.classList.remove('anim'), 1400);
+  }
+
+  /* ---------- Today marker in the hours table ---------- */
+  $$('.hours tr[data-day]').forEach((tr) => tr.classList.toggle('is-today', Number(tr.dataset.day) === todayJs));
+
+  /* ---------- Schedule ---------- */
+  let filter = 'all';
+  let activeDay = todayKey;
+  const daysEl = $('#days');
+  const boardEl = $('#board');
+
+  function renderTabs() {
+    if (!daysEl) return;   // the live Schedule page has no preview board
+    daysEl.innerHTML = DAYS.map((d, i) =>
+      '<button class="day-tab' + (d.key === todayKey ? ' is-today' : '') + '" role="tab" type="button" id="tab-' + d.key + '" aria-controls="day-' + d.key + '" aria-selected="' + (d.key === activeDay) + '" tabindex="' + (d.key === activeDay ? 0 : -1) + '" data-day="' + d.key + '"><b>' + d.short + '</b></button>'
+    ).join('') + '<span class="days__ind" aria-hidden="true"></span>';
+    positionIndicator();
+  }
+  function positionIndicator() {
+    const i = DAYS.findIndex((d) => d.key === activeDay);
+    const ind = $('.days__ind', daysEl);
+    if (ind) ind.style.setProperty('--x', i);
+  }
+  function rowHtml(c) {
+    const pill = c.fmt === 'gi' ? '<span class="pill">Gi</span>' : c.fmt === 'nogi' ? '<span class="pill pill--nogi">No-Gi</span>' : c.fmt === 'fit' ? '<span class="pill pill--open">Fitness</span>' : '<span class="pill pill--open">Open</span>';
+    return '<li class="row"><time datetime="' + c.start + '">' + range(c.start, c.end) + '</time>' + pill + '<span class="name">' + esc(c.name) + '</span><span class="sub">' + esc(c.sub) + '</span></li>';
+  }
+  function renderBoard() {
+    if (!boardEl) return;
+    boardEl.innerHTML = DAYS.map((d) => {
+      const rows = WEEK[d.key].filter((c) => filter === 'all' || c.prog === filter);
+      const body = rows.length ? '<ol class="rows">' + rows.map(rowHtml).join('') + '</ol>' : '<p class="empty">No ' + esc(PROG_LABEL[filter]) + ' classes on ' + d.label + '.</p>';
+      return '<section class="day' + (d.key === todayKey ? ' is-today' : '') + (d.key === activeDay ? '' : ' is-off') + '" id="day-' + d.key + '" role="tabpanel" aria-labelledby="tab-' + d.key + '" data-day="' + d.key + '"><h2 class="day__h">' + d.label + '</h2>' + body + '</section>';
+    }).join('');
+  }
+  function setDay(key, focus) {
+    if (!daysEl) return;
+    activeDay = key;
+    $$('.day-tab', daysEl).forEach((t) => { const on = t.dataset.day === key; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; if (on && focus) t.focus(); });
+    $$('.day', boardEl).forEach((p) => { p.classList.toggle('is-off', p.dataset.day !== key); });
+    positionIndicator();
+  }
+  function setFilter(f) {
+    filter = f;
+    $$('.chip-btn').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === f)));
+    renderBoard();
+  }
+  if (daysEl) daysEl.addEventListener('click', (e) => { const t = e.target.closest('.day-tab'); if (t) setDay(t.dataset.day, false); });
+  if (daysEl) daysEl.addEventListener('keydown', (e) => {
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) return;
+    e.preventDefault();
+    let i = DAYS.findIndex((d) => d.key === activeDay);
+    if (e.key === 'ArrowLeft') i = (i + DAYS.length - 1) % DAYS.length;
+    if (e.key === 'ArrowRight') i = (i + 1) % DAYS.length;
+    if (e.key === 'Home') i = 0;
+    if (e.key === 'End') i = DAYS.length - 1;
+    setDay(DAYS[i].key, true);
+  });
+  $$('.chip-btn').forEach((b) => b.addEventListener('click', () => setFilter(b.dataset.filter)));
+  renderTabs();
+  renderBoard();
+
+  /* ---------- Schedule source: the gym's GymDesk schedule (gym AEQWL) in a frame this page sizes ----------
+     GymDesk's widget posts ['setHeight', px] whenever its content height changes, ['scroll', y, half] and ['scrollToTop']
+     during its booking dialogs, and ['gymdesk-booking-redirect', url] if a redirect is set up. We create the frame the
+     first time the Schedule view shows (a frame created inside a hidden view measures itself as 0 tall), and if no
+     message arrives the page falls back: a link to the schedule on GymDesk on the live domain, the site's own board as a
+     labelled preview anywhere else (the prototype host does not allow the frame's script). */
+  const GD_SCHEDULE_URL = 'https://app.gymdesk.com/widgets/schedule/render/gym/AEQWL';
+  const sched = $('#sched');
+  let schedFrame = null, schedAlive = false;
+  const setSched = (state) => { if (sched) sched.dataset.state = state; };
+  const pokeSched = () => { try { if (schedFrame && schedFrame.contentWindow) schedFrame.contentWindow.postMessage(['setHeight', window.innerHeight], '*'); } catch (_) {} };
+  function failSched() { if (!sched || schedAlive) return; setSched(LIVE_HOST || !boardEl ? 'failed' : 'preview'); }   // the live build ships no preview board
+  function mountSchedule() {
+    if (!sched || schedFrame) return;
+    schedFrame = document.createElement('iframe');
+    schedFrame.title = "This week's classes, from the gym's GymDesk schedule";
+    schedFrame.setAttribute('scrolling', 'no');
+    schedFrame.src = GD_SCHEDULE_URL;
+    schedFrame.addEventListener('load', () => { pokeSched(); setTimeout(failSched, 3000); }, { once: true });
+    $('#gd-sched').append(schedFrame);
+    setSched('loading');
+    setTimeout(failSched, 8000);
+  }
+  window.addEventListener('message', (e) => {
+    if (e.origin !== 'https://app.gymdesk.com' || !schedFrame || e.source !== schedFrame.contentWindow || !Array.isArray(e.data)) return;
+    schedAlive = true;
+    const kind = e.data[0], value = e.data[1];
+    const frameTop = () => schedFrame.getBoundingClientRect().top + window.scrollY;
+    if (kind === 'setHeight') {
+      const h = Number(value);
+      if (h > 100) schedFrame.style.height = (h + 8) + 'px';
+      setSched('ready');
+    } else if (kind === 'scrollToTop') {
+      window.scrollTo({ top: frameTop() - hdr.offsetHeight - 12, behavior: motionOK ? 'smooth' : 'instant' });
+    } else if (kind === 'scroll') {
+      const y = frameTop() + (Number(value) || 0) - (window.innerHeight / 2 - (Number(e.data[2]) || 0));
+      window.scrollTo({ top: Math.max(0, y), behavior: motionOK ? 'smooth' : 'instant' });
+    } else if (kind === 'gymdesk-booking-redirect') {
+      if (typeof value === 'string' && /^https:\/\//i.test(value)) location.href = value;
+    }
+  });
+  window.addEventListener('resize', pokeSched);
+
+  /* ---------- Pricing (the live build writes the cards into the HTML; the prototype renders them here) ---------- */
+  const plansEl = $('#plans');
+  if (plansEl && !plansEl.firstElementChild) plansEl.innerHTML = PLANS.map(planHtml).join('');
+
+  /* ---------- FAQ accordion ---------- */
+  const acc = $('#acc');
+  if (acc && !acc.firstElementChild) acc.innerHTML = FAQ.map(faqHtml).join('');
+  if (acc) acc.addEventListener('click', (e) => {
+    const btn = e.target.closest('.acc__btn');
+    if (!btn) return;
+    const item = btn.parentElement;
+    const open = item.classList.contains('is-open');
+    $$('.acc__item.is-open', acc).forEach((it) => { it.classList.remove('is-open'); $('.acc__btn', it).setAttribute('aria-expanded', 'false'); });
+    if (!open) { item.classList.add('is-open'); btn.setAttribute('aria-expanded', 'true'); }
+  });
+
+  /* ---------- Router: #home · #schedule · #pricing · #faq, plus #coaches #visit #contact ---------- */
+  const VIEWS = {};
+  $$('.view').forEach((v) => { VIEWS[v.dataset.view] = v; });
+  const ANCHORS = { coaches: 'home', visit: 'home', contact: 'faq', about: 'home' };
+  const TITLES = { home: 'Valor Jiu-Jitsu', schedule: 'Schedule · Valor Jiu-Jitsu', pricing: 'Pricing · Valor Jiu-Jitsu', faq: 'FAQ & Contact · Valor Jiu-Jitsu' };
+  let current = null;
+  let pendingFilter = null;
+  /* Live build (build-site.mjs): one view per URL (/, /schedule/, /pricing/, /faq/), real links, <html data-page="…">,
+     and each page's own SEO <title>. The hash router then only scrolls to in-page anchors such as #contact. */
+  const PAGE = document.documentElement.dataset.page || '';
+
+  function show(view, target, explicit) {
+    const changed = view !== current;
+    Object.keys(VIEWS).forEach((k) => { VIEWS[k].hidden = k !== view; });
+    $$('.nav a[data-nav]').forEach((a) => a.classList.toggle('is-active', a.dataset.nav === view));
+    if (!PAGE) document.title = TITLES[view] || TITLES.home;
+    if (changed) {
+      const el = VIEWS[view];
+      if (motionOK && document.visibilityState === 'visible' && current !== null) {
+        el.classList.remove('is-entering'); void el.offsetWidth; el.classList.add('is-entering');
+        setTimeout(() => el.classList.remove('is-entering'), 400);
+      }
+      if (view === 'home') playHero();
+      current = view;
+    }
+    if (view === 'schedule') {
+      if (pendingFilter) { setFilter(pendingFilter); pendingFilter = null; }
+      else if (changed && filter !== 'all') setFilter('all');
+      mountSchedule();
+      pokeSched();
+    }
+    const t = target ? document.getElementById(target === 'about' ? 'coaches' : target) : null;
+    if (t) {
+      const y = t.getBoundingClientRect().top + window.scrollY - (hdr.offsetHeight + 12);
+      window.scrollTo({ top: y, behavior: changed ? 'instant' : 'smooth' });
+    } else if (changed || explicit) {
+      window.scrollTo({ top: 0, behavior: changed ? 'instant' : 'smooth' });
+    }
+  }
+  function route(explicit) {
+    const h = (location.hash || '').replace('#', '');
+    if (PAGE) { show(PAGE, h && document.getElementById(h) ? h : null, explicit); return; }
+    if (VIEWS[h]) show(h, null, explicit);
+    else if (ANCHORS[h]) show(ANCHORS[h], h, explicit);
+    else show('home', null, explicit);
+  }
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    if (a.hasAttribute('data-skip')) { e.preventDefault(); const m = $('#main'); m.tabIndex = -1; m.focus(); return; }   // skip link: focus main without touching the route
+    if (a.dataset.filter) pendingFilter = a.dataset.filter;
+    const h = a.getAttribute('href').slice(1);
+    if (location.hash === '#' + h) { e.preventDefault(); route(true); }
+  });
+  window.addEventListener('hashchange', () => route(true));
+  route(false);
+
+  /* Google reviews. With a Places API (New) key the band reads Google on every page load (nothing is stored: Google's
+     policy allows caching only the place ID). Without a key, previews read reviews.json, a dated copy of the listing in
+     the same shape; the live domain never does. Shown as Google returns them (its five "most relevant", its order), with
+     the author's name, avatar and profile link, the relative date, a note on ordering, and a link back to Google Maps.
+     Reviews by current coaches are left out and the note says so. */
+  const PLACE = { id: 'ChIJI55CRF7DwoARj9ILlhAUIJs', key: '', snapshot: 'reviews.json', coaches: ['David Zepeda', 'Marnie Wheeler', 'Jando', 'Jason', 'Hondo'] };
+  const rvBox = $('#reviews');
+  if (rvBox) {
+    const quotes = $('#quotes'), eyebrow = $('#reviews-eyebrow'), note = $('#reviews-note'), more = $('#reviews-link');
+    const isCoach = (n) => !!n && PLACE.coaches.some((c) => n.toLowerCase().includes(c.toLowerCase()));
+    const fmtRating = (r) => Number.isInteger(r) ? r.toFixed(1) : String(r);
+    const starRow = (r) => { const n = Math.min(5, Math.max(1, Math.round(r || 5))); return '★'.repeat(n) + '☆'.repeat(5 - n); };
+    const renderReviews = (p) => {
+      const list = (Array.isArray(p.reviews) ? p.reviews : []).filter((r) => r.text && r.text.text && !isCoach(r.authorAttribution && r.authorAttribution.displayName)).slice(0, 4);
+      if (!list.length) return false;
+      if (p.rating && p.userRatingCount) {
+        eyebrow.textContent = fmtRating(p.rating) + ' on Google · ' + p.userRatingCount + ' reviews';
+        const label = more.querySelector('span'); if (label) label.textContent = 'Read all ' + p.userRatingCount + ' reviews on Google Maps';
+      }
+      const allLink = (p.googleMapsLinks && p.googleMapsLinks.reviewsUri) || p.googleMapsUri; if (allLink) more.href = allLink;
+      quotes.innerHTML = list.map((r, i) => {
+        const a = r.authorAttribution || {}; const name = (a.displayName || 'A Google user').trim();
+        const full = r.text.text.trim(); const long = full.length > 330; const shown = long ? full.slice(0, 300).replace(/\s+\S*$/, '') + '…' : full;
+        const avatar = a.photoUri
+          ? '<img class="quote__avatar" src="' + esc(a.photoUri) + '" alt="" width="32" height="32" loading="lazy" referrerpolicy="no-referrer">'
+          : '<span class="quote__avatar quote__avatar--init" aria-hidden="true">' + esc(name[0] || '?') + '</span>';
+        const who = a.uri ? '<a href="' + esc(a.uri) + '" target="_blank" rel="noopener">' + esc(name) + '</a>' : esc(name);
+        const when = r.relativePublishTimeDescription ? ' · ' + esc(r.relativePublishTimeDescription) : '';
+        const on = r.googleMapsUri ? ' · <a href="' + esc(r.googleMapsUri) + '" target="_blank" rel="noopener">' + (long ? 'Full review' : 'On Google') + '</a>' : '';
+        return '<blockquote class="quote reveal" style="--i:' + i + '"><div class="stars" role="img" aria-label="' + Math.round(r.rating || 5) + ' out of 5 stars">' + starRow(r.rating) + '</div><p>' + esc(shown).replace(/\n+/g, '<br>') + '</p><footer>' + avatar + '<span>' + who + when + on + '</span></footer></blockquote>';
+      }).join('');
+      quotes.dataset.n = String(list.length);
+      let n = "Up to four of Google's most relevant reviews, in Google's order, minus any by our own coaches. Reviews aren't verified by Google, which removes fake content when it finds it.";
+      if (p._snapshot) n += ' Preview: a copy of the listing from ' + p._snapshot + '; the live site reads Google on every page load.';
+      note.textContent = n; note.hidden = false;
+      rvBox.dataset.state = p._snapshot ? 'snapshot' : 'live';
+      return true;
+    };
+    const loadReviews = async () => {
+      try {
+        let res;
+        if (PLACE.key) {
+          res = await fetch('https://places.googleapis.com/v1/places/' + PLACE.id + '?fields=rating,userRatingCount,googleMapsUri,googleMapsLinks,reviews&languageCode=en&key=' + encodeURIComponent(PLACE.key));
+        } else if (LIVE_HOST || !PLACE.snapshot) { rvBox.dataset.state = 'nokey'; return; }   // never stale copies on the live domain (the live build also blanks the snapshot)
+        else res = await fetch(PLACE.snapshot, { cache: 'no-store' });
+        if (!res.ok) throw new Error('reviews ' + res.status);
+        if (!renderReviews(await res.json())) rvBox.dataset.state = 'empty';
+      } catch (e) { rvBox.dataset.state = 'failed'; }
+    };
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((es) => { if (es.some((x) => x.isIntersecting)) { io.disconnect(); loadReviews(); } }, { rootMargin: '600px 0px' });
+      io.observe(rvBox);
+    } else loadReviews();
+    window.__loadReviews = loadReviews;   // test hook: hidden tabs never fire IntersectionObserver
+  }
+})();
+</script>
+<div class="pv" aria-hidden="true">Preview · 2026-11-27</div></body></html>
